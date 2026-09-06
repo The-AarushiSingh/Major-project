@@ -45,6 +45,7 @@ function JobList({ account }) {
     contract.on("JobAccepted", loadJobs);
     contract.on("WorkCompleted", loadJobs);
     contract.on("PaymentReleased", loadJobs);
+    contract.on("JobCancelled", loadJobs);
 
     return () => {
       contract.removeAllListeners();
@@ -63,6 +64,11 @@ function JobList({ account }) {
 
   async function approveAndPay(id) {
     const tx = await contract.approveAndPay(id);
+    await tx.wait();
+  }
+
+  async function cancelJob(id) {
+    const tx = await contract.cancelJob(id);
     await tx.wait();
   }
 
@@ -124,6 +130,9 @@ function JobList({ account }) {
 
           {Number(job.status) === 0 && job.client.toLowerCase() !== account?.toLowerCase() && (
             <button onClick={() => acceptJob(job.id)}>Accept This Job</button>
+          )}
+          {Number(job.status) === 0 && job.client.toLowerCase() === account?.toLowerCase() && (
+            <button onClick={() => cancelJob(job.id)}>Cancel Job</button>
           )}
           {Number(job.status) === 1 && job.freelancer.toLowerCase() === account?.toLowerCase() && (
             <button onClick={() => markCompleted(job.id)}>Mark Work Completed</button>

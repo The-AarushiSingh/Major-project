@@ -12,4 +12,5 @@ export const CONTRACT_ABI = [
   "event JobAccepted(uint256 indexed jobId, address indexed freelancer)",
   "event WorkCompleted(uint256 indexed jobId)",
   "event PaymentReleased(uint256 indexed jobId, address indexed freelancer, uint256 amount)",
+  "event JobCancelled(uint256 indexed jobId)",
 ];

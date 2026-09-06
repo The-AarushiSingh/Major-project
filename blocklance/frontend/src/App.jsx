@@ -3,6 +3,7 @@ import { formatEther } from "ethers";
 import PostJob from "./PostJob";
 import JobList from "./JobList";
 import "./App.css";
+import ChatWidget from "./ChatWidget";
 
 function shortAddr(addr) {
   if (!addr) return "";
@@ -40,6 +41,8 @@ function App() {
           <JobList account={account} />
         </>
       )}
+
+      <ChatWidget />
     </div>
   );
 }

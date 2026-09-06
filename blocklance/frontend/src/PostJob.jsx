@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { parseEther } from "ethers";
 import { useWeb3 } from "./Web3Context";
+import BudgetSuggester from "./BudgetSuggester";
 
 function PostJob() {
   const { contract } = useWeb3();
@@ -50,6 +51,7 @@ function PostJob() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        <BudgetSuggester title={title} description={description} />
         <input
           placeholder="Budget in ETH (e.g. 0.5)"
           value={budget}
